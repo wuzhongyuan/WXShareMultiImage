@@ -15,8 +15,8 @@ object ClipboardUtil {
      * 复制内容到剪切板。
      */
     fun setPrimaryClip(context: Context, label: CharSequence, text: CharSequence) {
-        (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-                .primaryClip = ClipData.newPlainText(label, text)
+        val systemService = context.getSystemService(Context.CLIPBOARD_SERVICE)
+        (systemService as ClipboardManager).setPrimaryClip(ClipData.newPlainText(label, text))
     }
 
     /**

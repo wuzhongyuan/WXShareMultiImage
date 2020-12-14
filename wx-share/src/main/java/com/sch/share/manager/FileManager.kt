@@ -18,7 +18,7 @@ object FileManager {
      * 文件临时保存目录。
      */
     fun getTmpFileDir(context: Context): String {
-        val parent = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val parent = context.externalCacheDir
         val child = "${context.packageName}${File.separator}shareTmp"
         return File(parent, child)
                 .run {
