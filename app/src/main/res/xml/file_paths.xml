@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+<!-- 适配7.0   //com.icebartech.honeybeework  com/hyphenate/chatuidemo/-->
+    <external-path path="Android/data/com/icebartech/honeybeework/" name="files_root" />
+    <external-path path="." name="external_storage_root" />
+    <!--app更新适配7.0-->
+    <external-path
+        name="app_update_external"
+        path="/" />
+    <external-cache-path
+        name="app_update_cache"
+        path="/" />
+    <external-files-path name="umeng_cache" path="umeng_cache/"/>
+
+    <cache-path name="cache_path" path="/" />
+</paths>

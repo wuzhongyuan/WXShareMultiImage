@@ -26,20 +26,7 @@ object WXShareMultiImageHelper {
     @JvmStatic
     @JvmOverloads
     fun shareToSession(activity: Activity, images: Array<Bitmap>, text: String = "") {
-        SessionShare.share(activity, images, text)
-    }
-
-    /**
-     * 分享到好友会话。
-     *
-     * @param activity [Context]
-     * @param images 图片列表。
-     * @param text 分享文本。
-     */
-    @JvmStatic
-    @JvmOverloads
-    fun shareToSession(activity: Activity, images: Array<File>, text: String = "") {
-        SessionShare.share(activity, images, text)
+        SessionShare.shareSession(activity, images, text)
     }
 
     /**
@@ -52,19 +39,6 @@ object WXShareMultiImageHelper {
     @JvmStatic
     @JvmOverloads
     fun shareToTimeline(activity: Activity, images: Array<Bitmap>, options: Options = Options()) {
-        TimelineShare.share(activity, images, options)
-    }
-
-    /**
-     * 分享到朋友圈。
-     *
-     * @param activity [Context]
-     * @param images 图片列表。
-     * @param options [Options] 可选项。
-     */
-    @JvmStatic
-    @JvmOverloads
-    fun shareToTimeline(activity: Activity, images: Array<File>, options: Options = Options()) {
         TimelineShare.share(activity, images, options)
     }
 

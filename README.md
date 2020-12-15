@@ -1,8 +1,8 @@
 # WXShareMultiImage
 
 基于无障碍服务实现微信多图分享。
-
-[ ![Download](https://api.bintray.com/packages/shichaohui/maven/wx-share/images/download.svg) ](https://bintray.com/shichaohui/maven/wx-share/_latestVersion)
+Fork 自 ![shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage)
+基于 ![shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage) 进行了Android 10.0适配。
 
 ## 功能
 
@@ -152,7 +152,7 @@ AlertDialog.Builder(context)
 # License
 
 ```
- Copyright 2018 StoneHui
+ Copyright 2020 StoneHui
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.

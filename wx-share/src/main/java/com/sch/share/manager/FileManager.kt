@@ -1,25 +1,30 @@
 package com.sch.share.manager
 
+import android.content.ContentUris
 import android.content.Context
-import android.graphics.Bitmap
+import android.database.Cursor
+import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import com.sch.share.utils.FileUtil
+import androidx.core.content.FileProvider
 import java.io.File
-import java.io.FileOutputStream
+
+
 /**
  * Created by StoneHui on 2019-11-28.
  * <p>
  * 文件管理
  */
+const val KEY_DISPLAY_NAME = "BeeGoAutoImage"
 object FileManager {
 
     /**
      * 文件临时保存目录。
      */
-    fun getTmpFileDir(context: Context): String {
-        val parent = context.externalCacheDir
-        val child = "${context.packageName}${File.separator}shareTmp"
+    fun getTmpImageDir(context: Context): String {
+        val parent = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        val child = "${File.separator}shareTmp"
         return File(parent, child)
                 .run {
                     if (!exists()) {
@@ -33,29 +38,29 @@ object FileManager {
      * 清理临时文件。
      */
     fun clearTmpFile(context: Context) {
+        val external = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val resolver = context.contentResolver
+        val selection : String = MediaStore.Images.Media.DISPLAY_NAME + " like ?"
+        val args: Array<String> = arrayOf("$KEY_DISPLAY_NAME%")
 
-        val fileDir = File(getTmpFileDir(context))
-
-        // 通知相册删除图片。
-        fileDir.listFiles().forEach {
-            context.contentResolver.delete(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    MediaStore.Images.Media.DATA + "=?",
-                    arrayOf(it.absolutePath))
+        val projection = arrayOf(MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME)
+        val cursor: Cursor? = resolver.query(external, projection, selection, args, null)
+        var imageUri: Uri? = null
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                imageUri = ContentUris.withAppendedId(external, cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID)))
+                resolver.delete(imageUri, null, null)
+            } while (cursor.moveToNext())
+            cursor.close()
         }
-
-        // 删除图片文件。
-        FileUtil.clearDir(fileDir)
     }
 
-    /**
-     * 保存图片并返回对应的 [File] 对象。
-      */
-    fun saveBitmap(context: Context, bitmap: Bitmap): File {
-        val path = "${getTmpFileDir(context)}${File.separator}${System.currentTimeMillis()}.jpg"
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(path))
-        return File(path)
+    private fun pathToUri(context: Context, path: String?): Uri {
+        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                Uri.fromFile(File(path))
+            } else {
+                FileProvider.getUriForFile(context, context.packageName + ".fileProvider", File(path))
+            }
     }
-
 }
 
