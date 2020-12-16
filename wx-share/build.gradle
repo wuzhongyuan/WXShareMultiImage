@@ -3,8 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def mVersionCode = 14
-def mVersionName = "1.1.4"
+def mVersionCode = 15
+def mVersionName = "1.1.5"
 
 android {
     compileSdkVersion 29
@@ -34,7 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-// ./gradlew clean build bintrayUpload -PbintrayUser=shichaohui -PbintrayKey=xxx -PdryRun=false
+// gradlew clean build bintrayUpload -PbintrayUser=wuzhongyuan -PbintrayKey=xxx -PdryRun=false
 apply plugin: "guru.stefma.bintrayrelease"
 version = mVersionName
 group = "com.wzy.share"
@@ -43,7 +43,15 @@ androidArtifact {
 }
 publish {
     userOrg = 'wuzhongyuan'
+    repoName = 'maven'
     desc = '微信分享多图'
     website = 'https://github.com/wuzhongyuan/WXShareMultiImage.git'
 }
 tasks.getByPath(":wx-share:dokka").enabled = false
+
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}

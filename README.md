@@ -14,7 +14,7 @@ Fork 自 ![shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMu
 ## Gradle 依赖
 
 ```groovy
-implementation 'com.wzy.share:wx-share:1.1.4'
+implementation 'com.wzy.share:wx-share:1.1.5'
 ```
 
 ## 配置
