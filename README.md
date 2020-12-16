@@ -1,8 +1,8 @@
 # WXShareMultiImage
 
 基于无障碍服务实现微信多图分享。
-Fork 自 ![shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage)
-基于 ![shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage) 进行了Android 10.0适配。
+Fork 自 [shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage)
+基于 [shichaohui/WXShareMultiImage](https://github.com/shichaohui/WXShareMultiImage) 进行了Android 10.0适配。
 
 ## 功能
 
